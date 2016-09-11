@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<script src="//cdn.auth0.com/js/lock/10.0/lock.min.js"></script>
+<script type="text/javascript">
+
+  var lock = new Auth0Lock('dlPDEVWVs7ntxBTgG7H6kyJUgjMflvrX', 'medtrainer.auth0.com');
+
+  var options = {
+  theme: {
+    logo: 'https://lms.medtrainer.com/img/logo-principal.png',
+     primaryColor: 'green'
+  }  
+};
+
+
+  function signin() {
+    lock.show({
+        callbackURL: 'http://localhost:8000/welcome'
+      , responseType: 'code'
+      , authParams: {
+        scope: 'openid email'  // Learn about scopes: https://auth0.com/docs/scopes
+      }
+    });
+  }
+</script>
+<button onclick="window.signin();">Login</button>
+{% endblock %}
